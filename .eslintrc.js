@@ -7,11 +7,15 @@ module.exports = {
       },
     },
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', 'testing-library', 'jest-dom'],
   extends: [
     'react-app', // eslint-config-react-app
     'airbnb', // eslint-config-airbnb
     'prettier', // eslint-config-prettier
+    'react-app/jest',
+    'plugin:testing-library/recommended',
+    'plugin:testing-library/react',
+    'plugin:jest-dom/recommended',
   ],
 
   rules: {

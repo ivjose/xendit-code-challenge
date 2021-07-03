@@ -1,8 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import App from './App'
 
-test('renders learn react link', () => {
+test('renders navigation links', () => {
   render(<App />)
-  const linkElement = screen.getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+  const navLinksElement = screen.getAllByRole('link')
+
+  expect(navLinksElement).toHaveLength(3)
+
+  const linkTexts = navLinksElement.map((element) => element.text)
+  expect(linkTexts).toEqual(['Home', 'News Letter', 'Universities List'])
 })
