@@ -6,6 +6,8 @@ import Home from 'pages/Home'
 import NewsLetter from 'pages/NewsLetter/NewsLetter'
 import UniversitiesList from 'pages/UniversitiesList'
 
+import './styles/output.css'
+
 function App() {
   return (
     <Router>
