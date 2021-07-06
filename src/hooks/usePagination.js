@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-const usePagination = (initialState) => {
-  const { itemsPerPage, data, startFrom } = initialState
+const usePagination = ({ itemsPerPage, data, startFrom }) => {
   const perPage = itemsPerPage || 10
   const pages = Math.ceil(data.length / perPage)
   const pagination = []
@@ -47,7 +46,7 @@ const usePagination = (initialState) => {
       setSlicedData([...data].slice(currentPage * perPage, (currentPage + 1) * perPage))
     }
   }
-
+  console.log(data.length, slicedData)
   return {
     slicedData,
     pagination,
