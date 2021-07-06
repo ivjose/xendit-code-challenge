@@ -4,6 +4,7 @@ import NavBar from 'components/NavBar'
 
 import Home from 'pages/Home'
 import Login from 'pages/Login'
+import Register from 'pages/Register'
 import NewsLetter from 'pages/NewsLetter/NewsLetter'
 import UniversitiesList from 'pages/UniversitiesList'
 
@@ -22,6 +23,9 @@ function App() {
 
           <Route exact path="/login">
             <Login />
+          </Route>
+          <Route exact path="/register">
+            <Register />
           </Route>
           <Route path="/news-letter">
             <NewsLetter />

@@ -1,15 +1,16 @@
 import { useState } from 'react'
 
-// import axios from 'axios'
+import axios from 'axios'
 import InputField from 'components/InputField'
 import AlertDisplay from 'components/AlertDisplay'
 
 const DEFAULT_VALUE = {
+  name: '',
   email: '',
   password: '',
 }
 
-const Login = () => {
+const Register = () => {
   const [userCredentials, setUserCredentials] = useState(DEFAULT_VALUE)
   const [errorFields, setErrorFields] = useState(DEFAULT_VALUE)
   const [status, setStatus] = useState({
@@ -70,9 +71,14 @@ const Login = () => {
     }
     setStatus({ state: 'loading', message: '' })
     try {
-      //   await axios.post('http://localhost:3030/users', {
-      //     ...userCredentials,
-      //   })
+      const usersList = await axios.get('http://localhost:3030/users')
+      console.log(usersList.data, 'DDDDDDD')
+
+      const { data } = usersList
+      await axios.post('http://localhost:3030/users', {
+        id: data.length + 1,
+        ...userCredentials,
+      })
 
       setStatus({ state: 'success', message: 'Successfully Login' })
       setUserCredentials(DEFAULT_VALUE)
@@ -84,12 +90,19 @@ const Login = () => {
   return (
     <div className="max-w-2xl mx-auto overflow-hidden bg-white border shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">
-        <h1 className="text-lg font-medium leading-6 text-gray-900">Login</h1>
+        <h1 className="text-lg font-medium leading-6 text-gray-900">Registration</h1>
       </div>
       {status.state && <AlertDisplay status={status.state} message={status.message} />}
 
       <div className="px-4 py-5 text-gray-400 sm:p-6">
         <form className="space-y-6" onSubmit={handleSubmit}>
+          <InputField
+            name="name"
+            label="Your Full Name"
+            value={userCredentials.name}
+            error={errorFields.name}
+            updateField={updateField}
+          />
           <InputField
             name="email"
             type="email"
@@ -114,7 +127,7 @@ const Login = () => {
               type="submit"
               className="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Sign In
+              Register
             </button>
           </div>
         </form>
@@ -123,4 +136,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register
