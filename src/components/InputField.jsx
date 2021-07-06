@@ -15,7 +15,7 @@ const InputField = ({ name, label, placeholder, value, type, error, updateField,
         name={name}
         type={type}
         placeholder={placeholder}
-        className="block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+        className="block w-full px-4 py-3 text-gray-800 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
       />
     </div>
 

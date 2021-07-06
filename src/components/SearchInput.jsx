@@ -2,7 +2,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import PropTypes from 'prop-types'
 
 const SearchInput = ({ handleChange, text }) => (
-  <div className="flex justify-between flex-1 px-4 py-2 bg-white border-t border-b">
+  <div className="flex justify-between flex-1 px-4 py-2 bg-gray-100 border-t border-b">
     <div className="flex flex-1">
       <div className="flex w-full lg:ml-0">
         <label htmlFor="search-field" className="sr-only">
@@ -16,7 +16,7 @@ const SearchInput = ({ handleChange, text }) => (
             id="search-field"
             defaultValue={text}
             onChange={handleChange}
-            className="block w-full h-full py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 border-transparent focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
+            className="block w-full h-full py-2 pl-8 pr-3 text-xl text-gray-900 placeholder-gray-500 bg-gray-100 border-transparent focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent"
             placeholder="Search"
             type="search"
             name="search"

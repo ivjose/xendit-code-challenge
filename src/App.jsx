@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import NavBar from 'components/NavBar'
 
 import Home from 'pages/Home'
+import Login from 'pages/Login'
 import NewsLetter from 'pages/NewsLetter/NewsLetter'
 import UniversitiesList from 'pages/UniversitiesList'
 
@@ -17,6 +18,10 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+
+          <Route exact path="/login">
+            <Login />
           </Route>
           <Route path="/news-letter">
             <NewsLetter />

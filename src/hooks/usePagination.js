@@ -46,7 +46,7 @@ const usePagination = ({ itemsPerPage, data, startFrom }) => {
       setSlicedData([...data].slice(currentPage * perPage, (currentPage + 1) * perPage))
     }
   }
-  console.log(data.length, slicedData)
+
   return {
     slicedData,
     pagination,
