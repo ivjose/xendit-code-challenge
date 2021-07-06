@@ -1,5 +1,5 @@
 {
-  "users": [
+  "news-letter": [
     {
       "id": 1,
       "name": "John Doe",
@@ -9,6 +9,19 @@
       "id": 2,
       "name": "John  Smith",
       "email": "john_smith@email.com"
+    },
+    {
+      "id": 3,
+      "name": "Jose Santos IV",
+      "email": "sampls@gasd.sdd"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john_doe@email.com",
+      "password": "hello world"
     }
   ]
 }
