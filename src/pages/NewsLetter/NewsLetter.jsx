@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import axios from 'axios'
 import InputField from 'components/InputField'
@@ -10,7 +10,6 @@ const DEFAULT_VALUE = {
 }
 
 const NewsLetter = () => {
-  const [newsLetterList, setNewsLetterList] = useState([])
   const [userCredentials, setUserCredentials] = useState(DEFAULT_VALUE)
   const [errorFields, setErrorFields] = useState(DEFAULT_VALUE)
   const [status, setStatus] = useState({
@@ -71,8 +70,10 @@ const NewsLetter = () => {
     }
     setStatus({ state: 'loading', message: '' })
     try {
+      const response = await axios.get('http://localhost:3030/news-letter')
+
       await axios.post('http://localhost:3030/news-letter', {
-        id: newsLetterList.length + 1,
+        id: response.data.length + 1,
         ...userCredentials,
       })
 
@@ -82,20 +83,6 @@ const NewsLetter = () => {
       setStatus({ state: 'error', message: 'Failed to save' })
     }
   }
-
-  useEffect(() => {
-    const fetchUserList = async () => {
-      try {
-        const response = await axios.get('http://localhost:3030/news-letter')
-
-        setNewsLetterList(response.data)
-      } catch (error) {
-        setStatus({ state: 'error', message: 'Error on User list check' })
-      }
-    }
-
-    fetchUserList()
-  }, [])
 
   return (
     <div className="max-w-2xl mx-auto overflow-hidden bg-white border shadow sm:rounded-lg">

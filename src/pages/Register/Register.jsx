@@ -80,10 +80,10 @@ const Register = () => {
         ...userCredentials,
       })
 
-      setStatus({ state: 'success', message: 'Successfully Login' })
+      setStatus({ state: 'success', message: 'Successfully Register and you can Login' })
       setUserCredentials(DEFAULT_VALUE)
     } catch (error) {
-      setStatus({ state: 'error', message: 'Failed to login' })
+      setStatus({ state: 'error', message: 'Failed to register' })
     }
   }
 

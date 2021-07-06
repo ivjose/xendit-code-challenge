@@ -9,11 +9,6 @@
       "id": 2,
       "name": "John  Smith",
       "email": "john_smith@email.com"
-    },
-    {
-      "id": 3,
-      "name": "Jose Santos IV",
-      "email": "sampls@gasd.sdd"
     }
   ],
   "users": [
@@ -21,24 +16,6 @@
       "id": 1,
       "name": "John Doe",
       "email": "john_doe@email.com",
-      "password": "hello world"
-    },
-    {
-      "id": 2,
-      "name": "Sample Hello World",
-      "email": "sasdsd@dsd.sdsd",
-      "password": "asdasddaa"
-    },
-    {
-      "id": 3,
-      "name": "Jose Santos IV",
-      "email": "sdamplsd@gmail.com",
-      "password": "helloworld"
-    },
-    {
-      "id": 4,
-      "name": "James Pogi",
-      "email": "james@pogi.com",
       "password": "helloworld"
     }
   ]

@@ -34,4 +34,5 @@ export const handlers = [
   rest.post('http://localhost:3030/news-letter', (req, res, ctx) =>
     res(ctx.json({ status: 'success' }))
   ),
+  rest.post('http://localhost:3030/users', (req, res, ctx) => res(ctx.json({ status: 'success' }))),
 ]

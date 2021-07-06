@@ -14,10 +14,6 @@ const Login = () => {
   const { authLogin, isLoading, ...authDetails } = useLoginAuth()
   const [userCredentials, setUserCredentials] = useState(DEFAULT_VALUE)
   const [errorFields, setErrorFields] = useState(DEFAULT_VALUE)
-  const [status, setStatus] = useState({
-    state: '',
-    message: '',
-  })
 
   const checkError = (name, value) => {
     let errorMessage = ''
@@ -41,9 +37,6 @@ const Login = () => {
     const error = checkError(name, value)
 
     setErrorFields((prevState) => ({ ...prevState, [name]: error }))
-    if (status.state) {
-      setStatus({ state: '', message: '' })
-    }
   }
 
   const updateField = async (event) => {
@@ -112,7 +105,7 @@ const Login = () => {
 
           <div>
             <button
-              disabled={status.state === 'loading'}
+              disabled={isLoading}
               type="submit"
               className="inline-flex items-center justify-center w-full px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
