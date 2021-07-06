@@ -4,47 +4,54 @@ import userEvent from '@testing-library/user-event'
 import InputField from './InputField'
 
 test('should render', () => {
-  let value = ''
-  const onChange = jest.fn((ev) => {
-    value = ev.target.value
-  })
   const { getByLabelText } = render(
-    <InputField
-      name="email"
-      type="email"
-      label="Your Email"
-      error=""
-      value={value}
-      updateField={onChange}
-    />
+    <InputField name="name" label="Your Name" value="" updateField={jest.fn()} />
   )
 
-  const searchField = getByLabelText(/your email/i)
+  const searchField = getByLabelText(/your name/i)
   expect(searchField).toBeInTheDocument()
 
-  userEvent.type(searchField, 'johnDoe@gmail.com')
+  userEvent.type(searchField, 'John Doe')
 
-  expect(searchField.value).toBe('johnDoe@gmail.com')
+  expect(searchField.value).toBe('John Doe')
 })
 
 test('should render error message', () => {
-  let value = ''
-  const onChange = jest.fn((ev) => {
-    value = ev.target.value
-  })
   const { getByText } = render(
     <InputField
       name="email"
       type="email"
       label="Your Email"
       error="Required field"
-      value={value}
-      updateField={onChange}
+      value=""
+      updateField={jest.fn()}
     />
   )
 
-  const inputField = getByText('Required field')
+  const errorText = getByText('Required field')
 
-  expect(inputField).toBeInTheDocument()
-  expect(inputField).toHaveClass('text-red-600')
+  expect(errorText).toBeInTheDocument()
+  expect(errorText).toHaveClass('text-red-600')
+})
+
+test.only('should render toggle password', () => {
+  const { getByTestId } = render(
+    <InputField
+      name="password"
+      type="password"
+      label="Your Password"
+      value=""
+      updateField={jest.fn()}
+    />
+  )
+
+  const toggleButton = getByTestId('toggle-password')
+  const toggleOff = getByTestId('eye-close')
+  expect(toggleOff).toBeInTheDocument()
+
+  userEvent.click(toggleButton)
+  expect(toggleOff).not.toBeInTheDocument()
+
+  const toggleOn = getByTestId('eye-open')
+  expect(toggleOn).toBeInTheDocument()
 })
