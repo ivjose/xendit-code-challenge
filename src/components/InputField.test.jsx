@@ -4,14 +4,18 @@ import userEvent from '@testing-library/user-event'
 import InputField from './InputField'
 
 test('should render', () => {
+  let value = ''
+  const onChange = jest.fn((ev) => {
+    value = ev.target.value
+  })
   const { getByLabelText } = render(
     <InputField
       name="email"
       type="email"
       label="Your Email"
-      value=""
       error=""
-      updateField={jest.fn()}
+      value={value}
+      updateField={onChange}
     />
   )
 
@@ -24,14 +28,18 @@ test('should render', () => {
 })
 
 test('should render error message', () => {
+  let value = ''
+  const onChange = jest.fn((ev) => {
+    value = ev.target.value
+  })
   const { getByText } = render(
     <InputField
       name="email"
       type="email"
       label="Your Email"
-      value=""
       error="Required field"
-      updateField={jest.fn()}
+      value={value}
+      updateField={onChange}
     />
   )
 

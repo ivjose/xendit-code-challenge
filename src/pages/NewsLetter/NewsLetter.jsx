@@ -10,7 +10,7 @@ const DEFAULT_VALUE = {
 }
 
 const NewsLetter = () => {
-  const [usersList, setUsersList] = useState([])
+  const [newsLetterList, setNewsLetterList] = useState([])
   const [userCredentials, setUserCredentials] = useState(DEFAULT_VALUE)
   const [errorFields, setErrorFields] = useState(DEFAULT_VALUE)
   const [status, setStatus] = useState({
@@ -23,14 +23,14 @@ const NewsLetter = () => {
 
     const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-    if (!value) {
-      errorMessage = 'This is a Required Field'
-    }
-
     if (name === 'email') {
       if (!emailFormat.test(value)) {
         errorMessage = 'Incorrect Email format'
       }
+    }
+
+    if (!value) {
+      errorMessage = 'This is a Required Field'
     }
 
     return errorMessage
@@ -71,8 +71,8 @@ const NewsLetter = () => {
     }
     setStatus({ state: 'loading', message: '' })
     try {
-      await axios.post('http://localhost:3030/users', {
-        id: usersList.length + 1,
+      await axios.post('http://localhost:3030/news-letter', {
+        id: newsLetterList.length + 1,
         ...userCredentials,
       })
 
@@ -84,25 +84,17 @@ const NewsLetter = () => {
   }
 
   useEffect(() => {
-    let unmounted = false
     const fetchUserList = async () => {
       try {
-        const response = await axios.get('http://localhost:3030/users')
-        if (unmounted) {
-          setUsersList(response.data)
-        }
+        const response = await axios.get('http://localhost:3030/news-letter')
+
+        setNewsLetterList(response.data)
       } catch (error) {
-        if (unmounted) {
-          setStatus({ state: 'error', message: 'Error on User list check' })
-        }
+        setStatus({ state: 'error', message: 'Error on User list check' })
       }
     }
 
     fetchUserList()
-
-    return () => {
-      unmounted = true
-    }
   }, [])
 
   return (

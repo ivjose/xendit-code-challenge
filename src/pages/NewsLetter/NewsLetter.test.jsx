@@ -42,8 +42,8 @@ test('should render news letter', async () => {
 
 test('should render news letter display errors', async () => {
   server.resetHandlers(
-    rest.post('http://localhost:3030/users', (req, res, ctx) => res(ctx.status(500))),
-    rest.get('*http://localhost:3030/users', (req, res, ctx) =>
+    rest.post('http://localhost:3030/news-letter', (req, res, ctx) => res(ctx.status(500))),
+    rest.get('*http://localhost:3030/news-letter', (req, res, ctx) =>
       res(
         ctx.status(200),
         ctx.json([
@@ -69,19 +69,26 @@ test('should render news letter display errors', async () => {
     name: /submit/i,
   })
   userEvent.click(submitButton)
+  // Display all Errors field
+  const requiredTexts = screen.getAllByText('This is a Required Field')
+  expect(requiredTexts.length).toBe(2)
 
-  expect(screen.getByText('This is a Required Field')).toBeInTheDocument()
-  expect(screen.getByText('Incorrect Email format')).toBeInTheDocument()
+  // Display email error text
+  const emailField = screen.getByLabelText(/your email/i)
+  userEvent.type(emailField, 'Wrong Format')
+  const emailErrorText = screen.getByText('Incorrect Email format')
+  expect(emailErrorText).toBeInTheDocument()
+
+  userEvent.clear(emailField)
+  userEvent.type(emailField, 'gabsantos@gmail.com')
+  expect(emailField.value).toBe('gabsantos@gmail.com')
 
   const fullNameField = screen.getByLabelText(/your full name/i)
   userEvent.type(fullNameField, 'Gab Santos')
-
   expect(fullNameField.value).toBe('Gab Santos')
 
-  const emailField = screen.getByLabelText(/your email/i)
-  userEvent.type(emailField, 'gabsantos@gmail.com')
-
-  expect(emailField.value).toBe('gabsantos@gmail.com')
+  const checkErrorText = screen.queryByText('This is a Required Field')
+  expect(checkErrorText).not.toBeInTheDocument()
   userEvent.click(submitButton)
 
   await waitFor(async () => {
