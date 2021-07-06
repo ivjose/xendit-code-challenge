@@ -20,7 +20,7 @@ const InputField = ({ name, label, placeholder, value, type, error, updateField,
     </div>
 
     {error && (
-      <p className="mt-2 text-sm text-red-600" id="email-error">
+      <p className="mt-2 text-sm text-red-600" id={`${name}-error`}>
         {error}
       </p>
     )}

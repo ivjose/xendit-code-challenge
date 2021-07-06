@@ -84,12 +84,25 @@ const NewsLetter = () => {
   }
 
   useEffect(() => {
+    let unmounted = false
     const fetchUserList = async () => {
-      const response = await axios.get('http://localhost:3030/users')
-      setUsersList(response.data)
+      try {
+        const response = await axios.get('http://localhost:3030/users')
+        if (unmounted) {
+          setUsersList(response.data)
+        }
+      } catch (error) {
+        if (unmounted) {
+          setStatus({ state: 'error', message: 'Error on User list check' })
+        }
+      }
     }
 
     fetchUserList()
+
+    return () => {
+      unmounted = true
+    }
   }, [])
 
   return (
