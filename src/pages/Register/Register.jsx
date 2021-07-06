@@ -1,6 +1,7 @@
 import { useState } from 'react'
-
 import axios from 'axios'
+// import AsyncSelect from 'react-select'
+
 import InputField from 'components/InputField'
 import AlertDisplay from 'components/AlertDisplay'
 
@@ -72,7 +73,6 @@ const Register = () => {
     setStatus({ state: 'loading', message: '' })
     try {
       const usersList = await axios.get('http://localhost:3030/users')
-      console.log(usersList.data, 'DDDDDDD')
 
       const { data } = usersList
       await axios.post('http://localhost:3030/users', {

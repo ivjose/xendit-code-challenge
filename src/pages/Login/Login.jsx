@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 
-// import axios from 'axios'
+import { useLoginAuth } from 'contexts/LoginAuthContexts'
 import InputField from 'components/InputField'
 import AlertDisplay from 'components/AlertDisplay'
 
@@ -10,6 +11,7 @@ const DEFAULT_VALUE = {
 }
 
 const Login = () => {
+  const { authLogin, isLoading, ...authDetails } = useLoginAuth()
   const [userCredentials, setUserCredentials] = useState(DEFAULT_VALUE)
   const [errorFields, setErrorFields] = useState(DEFAULT_VALUE)
   const [status, setStatus] = useState({
@@ -68,25 +70,25 @@ const Login = () => {
     if (errorCheck.length > 1) {
       return null
     }
-    setStatus({ state: 'loading', message: '' })
-    try {
-      //   await axios.post('http://localhost:3030/users', {
-      //     ...userCredentials,
-      //   })
 
-      setStatus({ state: 'success', message: 'Successfully Login' })
-      setUserCredentials(DEFAULT_VALUE)
-    } catch (error) {
-      setStatus({ state: 'error', message: 'Failed to login' })
-    }
+    authLogin({ ...userCredentials })
   }
 
+  if (authDetails.isAuthenticated) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/',
+        }}
+      />
+    )
+  }
   return (
     <div className="max-w-2xl mx-auto overflow-hidden bg-white border shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">
         <h1 className="text-lg font-medium leading-6 text-gray-900">Login</h1>
       </div>
-      {status.state && <AlertDisplay status={status.state} message={status.message} />}
+      {authDetails.error && <AlertDisplay status="error" message={authDetails.error} />}
 
       <div className="px-4 py-5 text-gray-400 sm:p-6">
         <form className="space-y-6" onSubmit={handleSubmit}>

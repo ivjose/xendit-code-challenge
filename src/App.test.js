@@ -5,8 +5,8 @@ test('renders navigation links', () => {
   render(<App />)
   const navLinksElement = screen.getAllByRole('link')
 
-  expect(navLinksElement).toHaveLength(5)
+  expect(navLinksElement).toHaveLength(2)
 
   const linkTexts = navLinksElement.map((element) => element.text)
-  expect(linkTexts).toEqual(['Home', 'Login', 'Register', 'News Letter', 'Universities List'])
+  expect(linkTexts).toEqual(['Login', 'Register'])
 })
