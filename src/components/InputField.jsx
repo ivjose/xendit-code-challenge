@@ -14,7 +14,7 @@ const InputField = ({ name, label, placeholder, value, type, error, updateField,
       <div className="relative mt-1">
         <input
           {...res}
-          defaultValue={value}
+          value={value}
           onChange={updateField}
           id={name}
           name={name}

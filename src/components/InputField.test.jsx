@@ -1,12 +1,24 @@
+import { useState } from 'react'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import InputField from './InputField'
 
-test('should render', () => {
-  const { getByLabelText } = render(
-    <InputField name="name" label="Your Name" value="" updateField={jest.fn()} />
+const CustomForm = () => {
+  const [value, setValue] = useState('')
+
+  return (
+    <InputField
+      name="name"
+      label="Your Name"
+      value={value}
+      updateField={(event) => setValue(event.target.value)}
+    />
   )
+}
+
+test('should render', () => {
+  const { getByLabelText } = render(<CustomForm />)
 
   const searchField = getByLabelText(/your name/i)
   expect(searchField).toBeInTheDocument()
@@ -34,7 +46,7 @@ test('should render error message', () => {
   expect(errorText).toHaveClass('text-red-600')
 })
 
-test.only('should render toggle password', () => {
+test('should render toggle password', () => {
   const { getByTestId } = render(
     <InputField
       name="password"
